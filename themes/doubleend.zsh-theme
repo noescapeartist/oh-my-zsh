@@ -8,7 +8,13 @@ function get_pwd() {
 }
 
 function battery_charge() {
-  echo `python ~/bin/batcharge.py` 2>/dev/null
+  if [ -e ~/bin/batcharge.py ]
+  then
+    echo `python ~/bin/batcharge.py` 2>/dev/null
+  else
+    echo ''
+  fi
+
 }
 
 function put_spacing() {

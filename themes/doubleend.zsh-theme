@@ -4,23 +4,22 @@ function git_prompt_info() {
 }
 
 function get_pwd() {
-  echo "${PWD/#$HOME/~}"
+  echo "${PWD/$HOME/~}"
 }
 
 function battery_charge() {
   if [ -e ~/bin/batcharge.py ]
   then
-    echo `python ~/bin/batcharge.py` 2>/dev/null
+    echo `python ~/bin/batcharge.py`
   else
     echo ''
   fi
-
 }
 
 function put_spacing() {
   local git=$(git_prompt_info)
   if [ ${#git} != 0 ]; then
-    ((git=${#git} - 18))
+    ((git=${#git} - 10))
   else
     git=0
   fi
@@ -42,11 +41,11 @@ function put_spacing() {
   echo $spacing
 }
 
-PROMPT=$'
-%{$fg[cyan]%}%m: %{$fg[yellow]%}$(get_pwd)$(put_spacing)$(git_prompt_info) $(battery_charge)
-%{$reset_color%}→ '
+PROMPT='
+$fg[cyan]%m: $fg[yellow]$(get_pwd)$(put_spacing)$(git_prompt_info) $(battery_charge)
+$reset_color→ '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="[git:"
-ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}+"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="]$reset_color"
+ZSH_THEME_GIT_PROMPT_DIRTY="$fg[red]+"
+ZSH_THEME_GIT_PROMPT_CLEAN="$fg[green]"

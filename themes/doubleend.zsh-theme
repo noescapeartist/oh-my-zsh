@@ -41,9 +41,12 @@ function put_spacing() {
   echo $spacing
 }
 
-PROMPT='
-$fg[cyan]%m: $fg[yellow]$(get_pwd)$(put_spacing)$(git_prompt_info) $(battery_charge)
-$reset_color→ '
+function precmd() {
+print -rP '
+$fg[cyan]%m: $fg[yellow]$(get_pwd)$(put_spacing)$(git_prompt_info) $(battery_charge)'
+}
+
+PROMPT='$reset_color→ '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="[git:"
 ZSH_THEME_GIT_PROMPT_SUFFIX="]$reset_color"

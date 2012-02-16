@@ -4,7 +4,7 @@ function git_prompt_info() {
 }
 
 function get_pwd() {
-  echo "${PWD/$HOME/~}"
+  print -D $PWD
 }
 
 function battery_charge() {
